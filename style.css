@@ -1,0 +1,10 @@
+h1 {
+  color: blue;
+}
+button {
+  display: inline;
+}
+
+.today {
+  font-size: 30px;
+}
