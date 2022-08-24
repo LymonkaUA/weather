@@ -1,11 +1,3 @@
 button {
   display: inline;
 }
-#source {
-  text-align: center;
-  color: red;
-}
-
-.today {
-  font-size: 30px;
-}
