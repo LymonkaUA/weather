@@ -1,8 +1,9 @@
-h1 {
-  color: blue;
-}
 button {
   display: inline;
+}
+#source {
+  text-align: center;
+  color: red;
 }
 
 .today {
