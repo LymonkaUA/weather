@@ -46,19 +46,31 @@ searchCity.addEventListener("click", findCity);
 //Temp
 
 function showTemp(response) {
-  event.preventDefault();
-  let temp = Math.round(response.data.main.temp);
+  let temp = response.data.main.temp;
+
   let nowTemp = document.querySelector("#temp-now");
-  nowTemp.innerHTML = `${temp}`;
+  let nowHumidity = document.querySelector("#humidity");
+  let nowUVIndex = document.querySelector("#UV-Index");
+  let nowWind = document.querySelector("#wind");
+
+  nowTemp.innerHTML = Math.round(temp);
+  nowHumidity.innerHTML = response.data.main.humidity;
+  nowWind.innerHTML = Math.round(response.data.wind.speed);
 }
 
 function showTempCurrent(response) {
-  event.preventDefault();
-  let temp = Math.round(response.data.main.temp);
+  let temp = response.data.main.temp;
+
   let nowTemp = document.querySelector("#temp-now");
-  nowTemp.innerHTML = `${temp}`;
-  let newCity = document.querySelector("#city");
-  newCity.innerHTML = `${response.data.name}`;
+  let nowHumidity = document.querySelector("#humidity");
+  let nowUVIndex = document.querySelector("#UV-Index");
+  let nowWind = document.querySelector("#wind");
+  let nowCity = document.querySelector("#city");
+
+  nowTemp.innerHTML = Math.round(temp);
+  nowHumidity.innerHTML = response.data.main.humidity;
+  nowWind.innerHTML = Math.round(response.data.wind.speed);
+  nowCity.innerHTML = response.data.name;
 }
 
 function showLocation(position) {
