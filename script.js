@@ -52,11 +52,17 @@ function showTemp(response) {
   let nowHumidity = document.querySelector("#humidity");
   let nowUVIndex = document.querySelector("#UV-Index");
   let nowWind = document.querySelector("#wind");
+  let nowIcon = document.querySelector("#icon");
 
   nowDescription.innerHTML = response.data.weather[0].description;
   nowTemp.innerHTML = Math.round(temp);
   nowHumidity.innerHTML = response.data.main.humidity;
   nowWind.innerHTML = Math.round(response.data.wind.speed);
+  nowIcon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}.png`
+  );
+  nowIcon.setAttribute("alt", response.data.weather[0].description);
 }
 
 function showTempCurrent(response) {
