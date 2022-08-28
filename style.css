@@ -1,0 +1,10 @@
+body {
+  font-family: arial, sans-serif;
+}
+
+#description:first-letter {
+  text-transform: capitalize;
+}
+#city:first-letter {
+  text-transform: capitalize;
+}

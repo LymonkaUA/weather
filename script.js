@@ -47,12 +47,13 @@ searchCity.addEventListener("click", findCity);
 
 function showTemp(response) {
   let temp = response.data.main.temp;
-
+  let nowDescription = document.querySelector("#description");
   let nowTemp = document.querySelector("#temp-now");
   let nowHumidity = document.querySelector("#humidity");
   let nowUVIndex = document.querySelector("#UV-Index");
   let nowWind = document.querySelector("#wind");
 
+  nowDescription.innerHTML = response.data.weather[0].description;
   nowTemp.innerHTML = Math.round(temp);
   nowHumidity.innerHTML = response.data.main.humidity;
   nowWind.innerHTML = Math.round(response.data.wind.speed);
@@ -60,13 +61,14 @@ function showTemp(response) {
 
 function showTempCurrent(response) {
   let temp = response.data.main.temp;
-
+  let nowDescription = document.querySelector("#description");
   let nowTemp = document.querySelector("#temp-now");
   let nowHumidity = document.querySelector("#humidity");
   let nowUVIndex = document.querySelector("#UV-Index");
   let nowWind = document.querySelector("#wind");
   let nowCity = document.querySelector("#city");
 
+  nowDescription.innerHTML = response.data.weather[0].description;
   nowTemp.innerHTML = Math.round(temp);
   nowHumidity.innerHTML = response.data.main.humidity;
   nowWind.innerHTML = Math.round(response.data.wind.speed);
