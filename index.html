@@ -55,15 +55,22 @@
             </div>
           </form>
           <br />
-          <div id="current-data"></div>
-          <div id="description"></div>
+          <div>
+            Last updeted:
+            <span id="current-data"></span>
+          </div>
+          <div class="row fs-6">
+            <div class="col" id="description"></div>
+            <div class="col" align="right" id="units">
+              <span id="celsius">C </span>/
+              <a href="#" id="fahrenheit">F</a>
+            </div>
+          </div>
           <div class="row fs-2">
             <div class="col" id="city"></div>
-
             <div class="col" align="center">
               <img src="" alt="" id="icon" />
             </div>
-
             <div class="col" align="right">
               <strong>
                 <span id="temp-now"></span>

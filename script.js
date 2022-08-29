@@ -1,5 +1,3 @@
-let now = new Date();
-
 function correctDate(date) {
   let hours = date.getHours();
   if (hours < 10) {
@@ -25,9 +23,6 @@ function correctDate(date) {
   return `${day} ${hours}:${minutes}`;
 }
 
-let currentDate = document.querySelector("#current-data");
-currentDate.innerHTML = correctDate(now);
-
 // City
 function findCity(event) {
   event.preventDefault();
@@ -40,22 +35,21 @@ function findCity(event) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${apiCity}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(showTemp);
 }
-let searchCity = document.querySelector("#search-button");
-searchCity.addEventListener("click", findCity);
 
 //Temp
 
 function showTemp(response) {
-  let temp = response.data.main.temp;
   let nowDescription = document.querySelector("#description");
-  let nowTemp = document.querySelector("#temp-now");
+  let nowTempCels = document.querySelector("#temp-now");
   let nowHumidity = document.querySelector("#humidity");
   let nowUVIndex = document.querySelector("#UV-Index");
   let nowWind = document.querySelector("#wind");
   let nowIcon = document.querySelector("#icon");
 
+  tempC = response.data.main.temp;
+
   nowDescription.innerHTML = response.data.weather[0].description;
-  nowTemp.innerHTML = Math.round(temp);
+  nowTempCels.innerHTML = Math.round(tempC);
   nowHumidity.innerHTML = response.data.main.humidity;
   nowWind.innerHTML = Math.round(response.data.wind.speed);
   nowIcon.setAttribute(
@@ -66,17 +60,18 @@ function showTemp(response) {
 }
 
 function showTempCurrent(response) {
-  let temp = response.data.main.temp;
   let nowDescription = document.querySelector("#description");
-  let nowTemp = document.querySelector("#temp-now");
+  let nowTempCels = document.querySelector("#temp-now");
   let nowHumidity = document.querySelector("#humidity");
   let nowUVIndex = document.querySelector("#UV-Index");
   let nowWind = document.querySelector("#wind");
   let nowIcon = document.querySelector("#icon");
   let nowCity = document.querySelector("#city");
 
+  tempC = response.data.main.temp;
+
   nowDescription.innerHTML = response.data.weather[0].description;
-  nowTemp.innerHTML = Math.round(temp);
+  nowTempCels.innerHTML = Math.round(tempC);
   nowHumidity.innerHTML = response.data.main.humidity;
   nowWind.innerHTML = Math.round(response.data.wind.speed);
   nowIcon.setAttribute(
@@ -100,5 +95,27 @@ function goNavi(event) {
   navigator.geolocation.getCurrentPosition(showLocation);
 }
 
+// Unit conversion
+function convertToFahrenheit(event) {
+  event.preventDefault();
+  let nowTempF = Math.round((tempC * 9) / 5 + 32);
+  let tempEl = document.querySelector("#temp-now");
+  tempEl.innerHTML = nowTempF;
+}
+
 let currentCity = document.querySelector("#current-button");
 currentCity.addEventListener("click", goNavi);
+
+let now = new Date();
+
+let currentDate = document.querySelector("#current-data");
+currentDate.innerHTML = correctDate(now);
+
+let searchCity = document.querySelector("#search-button");
+searchCity.addEventListener("click", findCity);
+
+let tempC = null;
+let fBatton = document.querySelector("#fahrenheit");
+fBatton.addEventListener("click", convertToFahrenheit);
+
+findCity(Kyiv);
