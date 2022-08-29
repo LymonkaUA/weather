@@ -101,6 +101,16 @@ function convertToFahrenheit(event) {
   let nowTempF = Math.round((tempC * 9) / 5 + 32);
   let tempEl = document.querySelector("#temp-now");
   tempEl.innerHTML = nowTempF;
+  fBatton.setAttribute("class", "active");
+  cBatton.removeAttribute("class", "active");
+}
+
+function convertToCelsius(event) {
+  event.preventDefault();
+  let tempEl = document.querySelector("#temp-now");
+  tempEl.innerHTML = Math.round(tempC);
+  fBatton.removeAttribute("class", "active");
+  cBatton.setAttribute("class", "active");
 }
 
 let currentCity = document.querySelector("#current-button");
@@ -116,6 +126,8 @@ searchCity.addEventListener("click", findCity);
 
 let tempC = null;
 let fBatton = document.querySelector("#fahrenheit");
+let cBatton = document.querySelector("#celsius");
 fBatton.addEventListener("click", convertToFahrenheit);
+cBatton.addEventListener("click", convertToCelsius);
 
 findCity(Kyiv);
