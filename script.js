@@ -32,27 +32,6 @@ function showTemp(response) {
   let nowUVIndex = document.querySelector("#UV-Index");
   let nowWind = document.querySelector("#wind");
   let nowIcon = document.querySelector("#icon");
-
-  tempC = response.data.main.temp;
-
-  nowDescription.innerHTML = response.data.weather[0].description;
-  nowTempCels.innerHTML = Math.round(tempC);
-  nowHumidity.innerHTML = response.data.main.humidity;
-  nowWind.innerHTML = Math.round(response.data.wind.speed);
-  nowIcon.setAttribute(
-    "src",
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}.png`
-  );
-  nowIcon.setAttribute("alt", response.data.weather[0].description);
-}
-
-function showTempCurrent(response) {
-  let nowDescription = document.querySelector("#description");
-  let nowTempCels = document.querySelector("#temp-now");
-  let nowHumidity = document.querySelector("#humidity");
-  let nowUVIndex = document.querySelector("#UV-Index");
-  let nowWind = document.querySelector("#wind");
-  let nowIcon = document.querySelector("#icon");
   let nowCity = document.querySelector("#city");
 
   tempC = response.data.main.temp;
@@ -68,21 +47,20 @@ function showTempCurrent(response) {
   nowIcon.setAttribute("alt", response.data.weather[0].description);
   nowCity.innerHTML = response.data.name;
 }
+
 // City
 
 function findCity(apiCity) {
   let apiKey = "ca95aece5407f70771d3c2a89b07f94b";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${apiCity}&appid=${apiKey}&units=metric`;
-  let newCity = document.querySelector("#city");
 
   axios.get(apiUrl).then(showTemp);
-  newCity.innerHTML = `${apiCity}`;
 }
 
 function submitForm(event) {
   event.preventDefault();
-  let city = document.querySelector("#city-input");
-  findCity(city.value);
+  let cityInput = document.querySelector("#city-input");
+  findCity(cityInput.value);
 }
 
 function showLocation(position) {
@@ -90,7 +68,7 @@ function showLocation(position) {
   let lon = position.coords.longitude;
   let apiKey = "ca95aece5407f70771d3c2a89b07f94b";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
-  axios.get(apiUrl).then(showTempCurrent);
+  axios.get(apiUrl).then(showTemp);
 }
 
 function goNavi(event) {
@@ -133,4 +111,4 @@ let cBatton = document.querySelector("#celsius");
 fBatton.addEventListener("click", convertToFahrenheit);
 cBatton.addEventListener("click", convertToCelsius);
 
-findCity(Kyiv);
+findCity("Kyiv");
