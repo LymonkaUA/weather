@@ -94,6 +94,38 @@ function convertToCelsius(event) {
   cBatton.setAttribute("class", "active");
 }
 
+//
+function displayForcast() {
+  let forcastHTML = `<div class="col">`;
+  let days = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+  let forcastEl = document.querySelector("#forcast");
+  days.forEach(function (day) {
+    forcastHTML =
+      forcastHTML +
+      `
+  <tr>
+    <td>Sun, 17th</td>
+    <td align="center">
+      <i class="fa-solid fa-cloud-sun"></i>
+    </td>
+    <td align="right">
+      <strong> 23℃ </strong> /14℃
+    </td>
+  </tr>`;
+  });
+
+  forcastEl.innerHTML = forcastHTML;
+
+  forcastHTML = forcastHTML + `</div>`;
+}
 let currentCity = document.querySelector("#current-button");
 currentCity.addEventListener("click", goNavi);
 
@@ -112,3 +144,4 @@ fBatton.addEventListener("click", convertToFahrenheit);
 cBatton.addEventListener("click", convertToCelsius);
 
 findCity("Kyiv");
+displayForcast();
