@@ -95,24 +95,6 @@ function goNavi(event) {
   navigator.geolocation.getCurrentPosition(showLocation);
 }
 
-// Unit conversion
-function convertToFahrenheit(event) {
-  event.preventDefault();
-  let nowTempF = Math.round((tempC * 9) / 5 + 32);
-  let tempEl = document.querySelector("#temp-now");
-  tempEl.innerHTML = nowTempF;
-  fBatton.setAttribute("class", "active");
-  cBatton.removeAttribute("class", "active");
-}
-
-function convertToCelsius(event) {
-  event.preventDefault();
-  let tempEl = document.querySelector("#temp-now");
-  tempEl.innerHTML = Math.round(tempC);
-  fBatton.removeAttribute("class", "active");
-  cBatton.setAttribute("class", "active");
-}
-
 //Forcast
 function getCoord(coordinates) {
   let apiKey = "a43564c91a6c605aeb564c9ed02e3858";
@@ -163,11 +145,5 @@ currentDate.innerHTML = correctDate(now);
 
 let searchCity = document.querySelector("#search-button");
 searchCity.addEventListener("click", submitForm);
-
-let tempC = null;
-let fBatton = document.querySelector("#fahrenheit");
-let cBatton = document.querySelector("#celsius");
-fBatton.addEventListener("click", convertToFahrenheit);
-cBatton.addEventListener("click", convertToCelsius);
 
 findCity("Kyiv");

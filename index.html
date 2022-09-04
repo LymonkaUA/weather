@@ -20,7 +20,7 @@
 
   <body>
     <div class="container">
-      <div class="card m-auto p-2" style="width: 600px">
+      <div class="card m-auto mb-2 p-0" style="width: 600px">
         <div class="card-body">
           <form>
             <div class="row">
@@ -54,34 +54,23 @@
               </div>
             </div>
           </form>
-          <br />
-          <div>
+
+          <div class="last-date">
             Last updeted:
             <span id="current-data"></span>
           </div>
-          <div class="row fs-6">
-            <div class="col" id="description"></div>
-            <div class="col" align="right" id="units">
-              <a href="#" class="active" id="celsius">C </a>/
-              <a href="#" id="fahrenheit">F</a>
-            </div>
-          </div>
+          <div class="col" id="description"></div>
           <div class="row fs-2">
             <div class="col" id="city"></div>
             <div class="col" align="center">
               <img src="" alt="" id="icon" />
             </div>
             <div class="col" align="right">
-              <strong>
-                <span id="temp-now"></span>
-              </strong>
-              °
+              <strong> <span id="temp-now"></span>°C </strong>
             </div>
           </div>
 
-          <br />
-
-          <table class="table table-sm">
+          <table class="table table-sm mb-0">
             <tbody>
               <tr>
                 <td>💧Humidity</td>
@@ -102,10 +91,10 @@
           </table>
         </div>
       </div>
-      <br />
+
       <div class="card m-auto" style="width: 600px">
         <div class="card-body">
-          <table class="table table-sm">
+          <table class="table table-sm align-middle pt-0 mb-0 mt-0">
             <tbody id="forcast"></tbody>
           </table>
         </div>
