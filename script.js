@@ -46,7 +46,6 @@ function showTemp(response) {
   let nowDescription = document.querySelector("#description");
   let nowTempCels = document.querySelector("#temp-now");
   let nowHumidity = document.querySelector("#humidity");
-  let nowUVIndex = document.querySelector("#UV-Index");
   let nowWind = document.querySelector("#wind");
   let nowIcon = document.querySelector("#icon");
   let nowCity = document.querySelector("#city");
@@ -134,6 +133,9 @@ function displayForcast(response) {
   forcastEl.innerHTML = forcastHTML;
 
   forcastHTML = forcastHTML + `</div>`;
+
+  let nowUVIndex = document.querySelector("#UV-Index");
+  nowUVIndex.innerHTML = Math.round(response.data.current.uvi);
 }
 let currentCity = document.querySelector("#current-button");
 currentCity.addEventListener("click", goNavi);
