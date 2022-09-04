@@ -1,3 +1,4 @@
+//Time
 function correctDate(date) {
   let hours = date.getHours();
   if (hours < 10) {
@@ -23,6 +24,22 @@ function correctDate(date) {
   return `${day} ${hours}:${minutes}`;
 }
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+
+  return days[day];
+}
+
 //Temp
 
 function showTemp(response) {
@@ -46,6 +63,8 @@ function showTemp(response) {
   );
   nowIcon.setAttribute("alt", response.data.weather[0].description);
   nowCity.innerHTML = response.data.name;
+
+  getCoord(response.data.coord);
 }
 
 // City
@@ -94,32 +113,40 @@ function convertToCelsius(event) {
   cBatton.setAttribute("class", "active");
 }
 
-//
-function displayForcast() {
-  let forcastHTML = `<div class="col">`;
-  let days = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ];
+//Forcast
+function getCoord(coordinates) {
+  let apiKey = "a43564c91a6c605aeb564c9ed02e3858";
+  let apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude=minutely,hourly,alerts&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForcast);
+}
+function displayForcast(response) {
+  let forcast = response.data.daily;
+
+  let forcastHTML = `<div class="row">`;
+
   let forcastEl = document.querySelector("#forcast");
-  days.forEach(function (day) {
-    forcastHTML =
-      forcastHTML +
-      `
+  forcast.forEach(function (forcastDay, index) {
+    if (index < 5) {
+      forcastHTML =
+        forcastHTML +
+        `
   <tr>
-    <td>Sun, 17th</td>
+    <td>${formatDay(forcastDay.dt)}</td>
     <td align="center">
-      <i class="fa-solid fa-cloud-sun"></i>
+      <img 
+        src="http://openweathermap.org/img/wn/${
+          forcastDay.weather[0].icon
+        }@2x.png" 
+        alt=""
+        width=40>
     </td>
     <td align="right">
-      <strong> 23℃ </strong> /14℃
+      <strong> ${Math.round(forcastDay.temp.max)}℃ </strong> /${Math.round(
+          forcastDay.temp.min
+        )}℃
     </td>
   </tr>`;
+    }
   });
 
   forcastEl.innerHTML = forcastHTML;
@@ -144,4 +171,3 @@ fBatton.addEventListener("click", convertToFahrenheit);
 cBatton.addEventListener("click", convertToCelsius);
 
 findCity("Kyiv");
-displayForcast();
